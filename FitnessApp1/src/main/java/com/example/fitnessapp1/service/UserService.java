@@ -5,6 +5,7 @@ import com.example.fitnessapp1.resource.request.RegisterUserRequest;
 import com.example.fitnessapp1.resource.response.LoginResponse;
 
 public interface UserService {
-    LoginResponse register(RegisterUserRequest registerUserRequest);
-    LoginResponse login(LoginUserRequest loginUserRequest);
+    LoginResponse register(RegisterUserRequest registerRequest);
+    LoginResponse login(LoginUserRequest loginRequest);
+    void delete(Long id);
 }

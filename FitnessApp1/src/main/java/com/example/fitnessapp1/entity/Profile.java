@@ -15,6 +15,10 @@ public class Profile {
     @Column(name = "id")
     private Long id;
 
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "id")
+    private User user;
+
     @Column(name = "birthday", nullable = false, columnDefinition = "DATE")
     private Date birthday;
 
@@ -28,7 +32,8 @@ public class Profile {
     @Column(name = "weight", nullable = false, columnDefinition = "NUMERIC(4, 1)")
     private Float weight;
 
-    @Column(name = "BMI", nullable = false, columnDefinition = "NUMERIC(3, 1)")
+    // TODO nullable = false
+    @Column(name = "BMI", columnDefinition = "NUMERIC(3, 1)")
     private Float BMI;
 
     @Column(name = "goal_calories", nullable = false, columnDefinition = "INTEGER")

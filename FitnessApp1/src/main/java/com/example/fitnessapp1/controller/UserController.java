@@ -15,21 +15,22 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     private final UserService userService;
 
+    // register new user
     @PostMapping("/register")
-    private ResponseEntity<LoginResponse> registerUser(@Valid @RequestBody RegisterUserRequest request) {
-
-        System.out.println(request.toString());
-
-        return ResponseEntity.ok(userService.register(request));
+    private ResponseEntity<LoginResponse> registerUser(@Valid @RequestBody RegisterUserRequest registerRequest) {
+        return ResponseEntity.ok(userService.register(registerRequest));
     }
 
+    // login user
     @PostMapping("/login")
-    private void loginUser(@Valid @RequestBody LoginUserRequest request) {
-        System.out.println(request.toString());
+    private ResponseEntity<LoginResponse> loginUser(@Valid @RequestBody LoginUserRequest loginRequest) {
+        return ResponseEntity.ok(userService.login(loginRequest));
     }
 
-    @GetMapping("/profile")
-    private void getProfile(@Valid @RequestBody RegisterUserRequest request) {
-        System.out.println(request.toString());
+    // delete user
+    @DeleteMapping("/{id}")
+    private ResponseEntity<?> deleteUser(@PathVariable("id") Long id) {
+        userService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }
