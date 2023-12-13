@@ -18,7 +18,7 @@ public class RegisterUserRequest {
     private String password;
 
     @NotNull
-    private Date birthDate;
+    private Date dateOfBirth;
 
     @NotNull
     private Gender gender;
@@ -32,16 +32,6 @@ public class RegisterUserRequest {
     @DecimalMin(value = "0.0", inclusive = false)
     @DecimalMax(value = "1000.0", inclusive = false)
     private float weight;
-
-//    @NotNull
-//    @DecimalMin(value = "0.0", inclusive = false)
-//    @DecimalMax(value = "1000.0", inclusive = false)
-//    private float bodyFat;
-//
-//    @NotNull
-//    @DecimalMin(value = "0.0", inclusive = false)
-//    @DecimalMax(value = "1000.0", inclusive = false)
-//    private float BMI;
 
     @NotNull
     @Min(0)

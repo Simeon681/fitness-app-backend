@@ -35,8 +35,8 @@ public class UserServiceImpl implements UserService {
 
             Profile profile = PROFILE_MAPPER.fromProfileRequest(registerRequest);
             profile.setUser(savedUser);
-
             profileRepository.save(profile);
+
             return USER_MAPPER.toRegisterUserResponse(savedUser);
         } catch (DataIntegrityViolationException e) {
             throw new InvalidCredentialsException("User with username " + registerRequest.getUsername() + " already exists!");
@@ -58,6 +58,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void delete(Long id) {
         if (userRepository.existsById(id)) {
+            profileRepository.deleteById(id);
             userRepository.deleteById(id);
         } else {
             throw new EntityNotFoundException("Unable to find user with id " + id + "!");

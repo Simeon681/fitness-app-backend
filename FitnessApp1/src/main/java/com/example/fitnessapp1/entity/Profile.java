@@ -19,8 +19,8 @@ public class Profile {
     @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "id")
     private User user;
 
-    @Column(name = "birthday", nullable = false, columnDefinition = "DATE")
-    private Date birthday;
+    @Column(name = "dateOfBirth", nullable = false, columnDefinition = "DATE")
+    private Date dateOfBirth;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "gender", nullable = false, columnDefinition = "VARCHAR(6)")
@@ -32,9 +32,11 @@ public class Profile {
     @Column(name = "weight", nullable = false, columnDefinition = "NUMERIC(4, 1)")
     private Float weight;
 
-    // TODO nullable = false
-    @Column(name = "BMI", columnDefinition = "NUMERIC(3, 1)")
-    private Float BMI;
+//    @Column(name = "BMI", columnDefinition = "NUMERIC(3, 1)")
+//    private Float BMI;
+//
+//    @Column(name = "body_fat", columnDefinition = "NUMERIC(3, 1)")
+//    private Float bodyFat;
 
     @Column(name = "goal_calories", nullable = false, columnDefinition = "INTEGER")
     private Integer goalCalories;

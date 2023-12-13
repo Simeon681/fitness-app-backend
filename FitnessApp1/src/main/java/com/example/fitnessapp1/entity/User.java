@@ -15,6 +15,6 @@ public class User {
     @Column(name = "username", unique = true, nullable = false, columnDefinition = "VARCHAR(16)")
     private String username;
 
-    @Column(name = "password", nullable = false, columnDefinition = "VARCHAR(32)")
+    @Column(name = "password", nullable = false, columnDefinition = "VARCHAR(64)")
     private String password;
 }
