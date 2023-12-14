@@ -1,6 +1,5 @@
 package com.example.fitnessapp1.resource.request;
 
-import com.example.fitnessapp1.shared.MealType;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -8,7 +7,7 @@ import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
 @Data
-public class MealRequest {
+public class AddMealRequest {
     @NotEmpty
     @Length(min = 2, max = 32)
     private String name;
@@ -16,7 +15,4 @@ public class MealRequest {
     @NotNull
     @Min(0)
     private int calories;
-
-    @NotNull
-    private MealType type;
 }

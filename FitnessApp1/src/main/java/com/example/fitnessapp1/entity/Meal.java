@@ -12,7 +12,7 @@ public class Meal {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "name", nullable = false, columnDefinition = "VARCHAR(32)")
+    @Column(name = "name", unique = true, nullable = false, columnDefinition = "VARCHAR(32)")
     private String name;
 
     @Column(name = "calories", nullable = false, columnDefinition = "INTEGER")
