@@ -16,5 +16,5 @@ public class Meal {
     private String name;
 
     @Column(name = "calories", nullable = false, columnDefinition = "INTEGER")
-    private Integer calories;
+    private Integer calories; // per 100g
 }

@@ -1,22 +1,16 @@
 package com.example.fitnessapp1.resource.request;
 
 import com.example.fitnessapp1.shared.Gender;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.DecimalMax;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
-import org.hibernate.validator.constraints.Length;
 
 import java.util.Date;
 
 @Data
-public class RegisterUserRequest {
-    @NotEmpty
-    @Length(min = 6, max = 32)
-    private String username;
-
-    @NotEmpty
-    @Length(min = 8, max = 32)
-    private String password;
-
+public class ProfileResource {
     @NotNull
     private Date dateOfBirth;
 

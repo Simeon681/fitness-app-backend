@@ -26,14 +26,14 @@ public class MealServiceImpl implements MealService {
 
             return MEAL_MAPPER.toMealResponse(meal);
         } catch (DataIntegrityViolationException e) {
-            throw new InvalidCredentialsException("Meal with name " + addMealRequest.getName() + " already exists!");
+            throw new InvalidCredentialsException("Meal with name: " + addMealRequest.getName() + " already exists!");
         }
     }
 
     @Override
     public MealResponse getById(Long id) {
         Meal meal = mealRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Unable to find meal with id " + id + "!"));
+                .orElseThrow(() -> new EntityNotFoundException("Unable to find meal with id: " + id + "!"));
 
         return MEAL_MAPPER.toMealResponse(meal);
     }
@@ -41,7 +41,7 @@ public class MealServiceImpl implements MealService {
     @Override
     public MealResponse getByName(String name) {
         Meal meal = mealRepository.findByName(name)
-                .orElseThrow(() -> new EntityNotFoundException("Unable to find meal with name " + name + "!"));
+                .orElseThrow(() -> new EntityNotFoundException("Unable to find meal with name: " + name + "!"));
 
         return MEAL_MAPPER.toMealResponse(meal);
     }
@@ -51,7 +51,7 @@ public class MealServiceImpl implements MealService {
         if (mealRepository.existsById(id)) {
             mealRepository.deleteById(id);
         } else {
-            throw new EntityNotFoundException("Unable to find meal with id " + id + "!");
+            throw new EntityNotFoundException("Unable to find meal with id: " + id + "!");
         }
     }
 }

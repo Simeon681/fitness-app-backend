@@ -6,6 +6,7 @@ import com.example.fitnessapp1.repository.ProfileRepository;
 import com.example.fitnessapp1.repository.UserRepository;
 import com.example.fitnessapp1.resource.request.LoginUserRequest;
 import com.example.fitnessapp1.resource.request.RegisterUserRequest;
+import com.example.fitnessapp1.resource.request.UpdateUserRequest;
 import com.example.fitnessapp1.resource.response.LoginResponse;
 import com.example.fitnessapp1.service.UserService;
 import com.example.fitnessapp1.shared.exception.InvalidCredentialsException;
@@ -39,14 +40,14 @@ public class UserServiceImpl implements UserService {
 
             return USER_MAPPER.toRegisterUserResponse(savedUser);
         } catch (DataIntegrityViolationException e) {
-            throw new InvalidCredentialsException("User with username " + registerRequest.getUsername() + " already exists!");
+            throw new InvalidCredentialsException("User with username: " + registerRequest.getUsername() + " already exists!");
         }
     }
 
     @Override
     public LoginResponse login(LoginUserRequest loginRequest) {
         User user = userRepository.findByUsername(loginRequest.getUsername())
-                .orElseThrow(() -> new RuntimeException("Invalid username!"));
+                .orElseThrow(() -> new InvalidCredentialsException("Invalid username!"));
 
         if (!passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
             throw new InvalidCredentialsException("Invalid password!");
@@ -56,12 +57,27 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public LoginResponse update(UpdateUserRequest userRequest, Long id) {
+        try {
+            User user = userRepository.findById(id)
+                    .orElseThrow(() -> new EntityNotFoundException("Unable to find user with id: " + id + "!"));
+
+            user.setUsername(userRequest.getUsername());
+            user.setPassword(passwordEncoder.encode(userRequest.getPassword()));
+
+            return USER_MAPPER.toRegisterUserResponse(userRepository.save(user));
+        } catch (DataIntegrityViolationException e) {
+            throw new InvalidCredentialsException("User with username: " + userRequest.getUsername() + " already exists!");
+        }
+    }
+
+    @Override
     public void delete(Long id) {
         if (userRepository.existsById(id)) {
             profileRepository.deleteById(id);
             userRepository.deleteById(id);
         } else {
-            throw new EntityNotFoundException("Unable to find user with id " + id + "!");
+            throw new EntityNotFoundException("Unable to find user with id: " + id + "!");
         }
     }
 }
