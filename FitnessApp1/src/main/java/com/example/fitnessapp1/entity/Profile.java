@@ -4,7 +4,7 @@ import com.example.fitnessapp1.shared.Gender;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "profile")
@@ -19,8 +19,8 @@ public class Profile {
     @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "id")
     private User user;
 
-    @Column(name = "dateOfBirth", nullable = false, columnDefinition = "DATE")
-    private Date dateOfBirth;
+    @Column(name = "date_of_birth", nullable = false, columnDefinition = "DATE")
+    private LocalDate dateOfBirth;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "gender", nullable = false, columnDefinition = "VARCHAR(6)")

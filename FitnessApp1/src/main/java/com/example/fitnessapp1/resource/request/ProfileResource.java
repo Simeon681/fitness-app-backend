@@ -7,12 +7,12 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 public class ProfileResource {
     @NotNull
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
 
     @NotNull
     private Gender gender;

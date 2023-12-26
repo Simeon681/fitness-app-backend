@@ -3,8 +3,6 @@ package com.example.fitnessapp1.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.Date;
-
 @Entity
 @Table(name = "activity_stat")
 @Data
@@ -17,8 +15,8 @@ public class ActivityStat {
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     private User user;
 
-    @Column(name = "date", nullable = false, columnDefinition = "DATE")
-    private Date date;
+    @Column(name = "date", nullable = false, unique = true, columnDefinition = "VARCHAR(11)")
+    private String date;
 
     @Column(name = "steps", nullable = false, columnDefinition = "INTEGER")
     private Integer steps;
