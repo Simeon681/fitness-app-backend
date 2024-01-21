@@ -5,7 +5,7 @@ import jakarta.validation.constraints.*;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 public class RegisterUserRequest {
@@ -18,7 +18,7 @@ public class RegisterUserRequest {
     private String password;
 
     @NotNull
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
 
     @NotNull
     private Gender gender;

@@ -4,7 +4,7 @@ import com.example.fitnessapp1.shared.MealType;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "meal_stat")
@@ -19,7 +19,7 @@ public class MealStat {
     @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "id")
     private User user;
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @ManyToOne
     @JoinColumn(name = "meal_id", nullable = false, referencedColumnName = "id")
     private Meal meal;
 
@@ -31,5 +31,5 @@ public class MealStat {
     private MealType type;
 
     @Column(name = "date", nullable = false, columnDefinition = "DATE")
-    private Date date;
+    private LocalDate date;
 }

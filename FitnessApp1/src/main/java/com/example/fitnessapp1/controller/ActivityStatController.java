@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.*;
 public class ActivityStatController {
     private final ActivityStatService activityStatService;
 
-    @PostMapping("/add/{id}")
-    private ResponseEntity<ActivityStatResource> addActivityStat(@Valid @RequestBody ActivityStatResource activityStatResource, @PathVariable("id") Long id) {
-        return ResponseEntity.ok(activityStatService.add(activityStatResource, id));
+    @PostMapping("/create/{id}")
+    private ResponseEntity<ActivityStatResource> createActivityStat(@Valid @RequestBody ActivityStatResource activityStatResource, @PathVariable("id") Long id) {
+        return ResponseEntity.ok(activityStatService.create(activityStatResource, id));
     }
 
     @PatchMapping("/{userId}/{id}")

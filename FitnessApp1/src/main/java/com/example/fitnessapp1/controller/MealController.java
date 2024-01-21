@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.*;
 public class MealController {
     private final MealService mealService;
 
-    @PostMapping("/add")
-    private ResponseEntity<MealResponse> addMeal(@Valid @RequestBody AddMealRequest addMealRequest) {
-        return ResponseEntity.ok(mealService.add(addMealRequest));
+    @PostMapping("/create")
+    private ResponseEntity<MealResponse> createMeal(@Valid @RequestBody AddMealRequest addMealRequest) {
+        return ResponseEntity.ok(mealService.create(addMealRequest));
     }
 
     @GetMapping("/{id}")

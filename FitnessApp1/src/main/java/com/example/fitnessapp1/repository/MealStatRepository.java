@@ -1,9 +1,9 @@
 package com.example.fitnessapp1.repository;
 
-import com.example.fitnessapp1.entity.ActivityStat;
+import com.example.fitnessapp1.entity.MealStat;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ActivityStatRepository extends JpaRepository<ActivityStat, Long> {
+public interface MealStatRepository extends JpaRepository<MealStat, Long> {
 }

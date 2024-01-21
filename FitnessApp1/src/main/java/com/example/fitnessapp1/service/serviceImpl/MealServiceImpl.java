@@ -11,6 +11,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 import static com.example.fitnessapp1.mapper.MealMapper.MEAL_MAPPER;
 
 @Service
@@ -19,7 +21,7 @@ public class MealServiceImpl implements MealService {
     private final MealRepository mealRepository;
 
     @Override
-    public MealResponse add(AddMealRequest addMealRequest) {
+    public MealResponse create(AddMealRequest addMealRequest) {
         try {
             Meal meal = MEAL_MAPPER.fromMealRequest(addMealRequest);
             mealRepository.save(meal);
@@ -28,6 +30,23 @@ public class MealServiceImpl implements MealService {
         } catch (DataIntegrityViolationException e) {
             throw new InvalidCredentialsException("Meal with name: " + addMealRequest.getName() + " already exists!");
         }
+    }
+
+    @Override
+    public List<Meal> getAllMeals() {
+        return mealRepository.findAll();
+    }
+
+    @Override
+    public List<Meal> searchMealByName(String mealName) {
+        return getAllMeals().stream()
+                .filter(meal -> meal.getName().toLowerCase().contains(mealName.toLowerCase()))
+                .toList();
+    }
+
+    @Override
+    public Long add(Meal meal) {
+        return meal.getId();
     }
 
     @Override

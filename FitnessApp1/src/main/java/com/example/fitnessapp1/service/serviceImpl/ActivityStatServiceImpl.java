@@ -21,14 +21,14 @@ public class ActivityStatServiceImpl implements ActivityStatService {
     private final UserRepository userRepository;
 
     @Override
-    public ActivityStatResource add(ActivityStatResource activityStatResource, Long id) {
+    public ActivityStatResource create(ActivityStatResource activityStatResource, Long id) {
         try {
             ActivityStat activityStat = ACTIVITY_STAT_MAPPER.fromActivityStatResource(activityStatResource);
             activityStat.setUser(userRepository.getReferenceById(id));
-            activityStat.setDate(LocalDate.now().toString());
+            activityStat.setDate(LocalDate.now());
 
             return ACTIVITY_STAT_MAPPER.toActivityStatResource(activityStatRepository.save(activityStat));
-        } catch (Exception e) {
+        } catch (Exception e) { // TODO: specify exception
             throw new RuntimeException(e);
         }
     }
@@ -47,7 +47,6 @@ public class ActivityStatServiceImpl implements ActivityStatService {
                     .orElseThrow(() -> new EntityNotFoundException("Unable to find user with id: " + id + "!"));
 
             activityStat.setUser(user);
-            // activityStat.setUser(userRepository.getReferenceById(userId));
             activityStat.setSteps(activityStatResource.getSteps());
             activityStat.setCalories(activityStatResource.getCalories());
             activityStat.setWater(activityStatResource.getWater());
