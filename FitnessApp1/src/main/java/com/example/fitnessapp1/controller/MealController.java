@@ -19,6 +19,11 @@ public class MealController {
         return ResponseEntity.ok(mealService.create(addMealRequest));
     }
 
+    @GetMapping("/search")
+    private ResponseEntity<?> searchMealByName(@RequestParam("mealName") String mealName) {
+        return ResponseEntity.ok(mealService.searchMealByName(mealName));
+    }
+
     @GetMapping("/{id}")
     private ResponseEntity<MealResponse> getById(@PathVariable("id") Long id) {
         return ResponseEntity.ok(mealService.getById(id));

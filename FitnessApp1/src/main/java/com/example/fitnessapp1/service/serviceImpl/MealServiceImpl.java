@@ -33,20 +33,8 @@ public class MealServiceImpl implements MealService {
     }
 
     @Override
-    public List<Meal> getAllMeals() {
-        return mealRepository.findAll();
-    }
-
-    @Override
     public List<Meal> searchMealByName(String mealName) {
-        return getAllMeals().stream()
-                .filter(meal -> meal.getName().toLowerCase().contains(mealName.toLowerCase()))
-                .toList();
-    }
-
-    @Override
-    public Long add(Meal meal) {
-        return meal.getId();
+        return mealRepository.findByNameContaining(mealName);
     }
 
     @Override

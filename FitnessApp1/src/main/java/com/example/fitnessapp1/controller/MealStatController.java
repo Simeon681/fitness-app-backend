@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.*;
 public class MealStatController {
     private final MealStatService mealStatService;
 
-    @PostMapping("/create/{id}")
+    @PostMapping("/create/{id}/{mealId}")
     private ResponseEntity<MealStatResponse> createMealStat(
             @Valid @RequestBody AddMealStatRequest mealStatRequest,
             @PathVariable("id") Long id,
-            @RequestParam("mealId") Long mealId
+            @PathVariable("mealId") Long mealId
     ) {
         return ResponseEntity.ok(mealStatService.create(mealStatRequest, id, mealId));
     }

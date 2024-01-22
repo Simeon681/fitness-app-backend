@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 public class AddMealStatRequest {
     @NotNull
-    @DecimalMin(value = "0.1", inclusive = false)
+    @DecimalMin(value = "0.1")
     @DecimalMax(value = "50.0", inclusive = false)
     private Float portion;
 

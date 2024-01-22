@@ -1,8 +1,6 @@
 package com.example.fitnessapp1.resource.request;
 
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
@@ -15,4 +13,29 @@ public class AddMealRequest {
     @NotNull
     @Min(0)
     private int calories;
+
+    @NotNull
+    @DecimalMin(value = "0.0")
+    @DecimalMax(value = "100.0")
+    private float protein;
+
+    @NotNull
+    @DecimalMin(value = "0.0")
+    @DecimalMax(value = "100.0")
+    private float carbs;
+
+    @NotNull
+    @DecimalMin(value = "0.0")
+    @DecimalMax(value = "100.0")
+    private float fat;
+
+    @NotNull
+    @DecimalMin(value = "0.0")
+    @DecimalMax(value = "100.0")
+    private float fiber;
+
+    @NotNull
+    @DecimalMin(value = "0.0")
+    @DecimalMax(value = "100.0")
+    private float sugar;
 }
