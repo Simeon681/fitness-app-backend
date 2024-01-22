@@ -6,8 +6,6 @@ import com.example.fitnessapp1.resource.request.UpdateUserRequest;
 import com.example.fitnessapp1.resource.response.LoginResponse;
 
 public interface UserService {
-    LoginResponse register(RegisterUserRequest registerRequest);
-    LoginResponse login(LoginUserRequest loginRequest);
     LoginResponse update(UpdateUserRequest updateRequest, Long id);
     void delete(Long id);
 }

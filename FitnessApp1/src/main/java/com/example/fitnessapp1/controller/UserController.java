@@ -1,7 +1,5 @@
 package com.example.fitnessapp1.controller;
 
-import com.example.fitnessapp1.resource.request.LoginUserRequest;
-import com.example.fitnessapp1.resource.request.RegisterUserRequest;
 import com.example.fitnessapp1.resource.request.UpdateUserRequest;
 import com.example.fitnessapp1.resource.response.LoginResponse;
 import com.example.fitnessapp1.service.UserService;
@@ -15,16 +13,6 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
-
-    @PostMapping("/register")
-    private ResponseEntity<LoginResponse> registerUser(@Valid @RequestBody RegisterUserRequest registerRequest) {
-        return ResponseEntity.ok(userService.register(registerRequest));
-    }
-
-    @PostMapping("/login")
-    private ResponseEntity<LoginResponse> loginUser(@Valid @RequestBody LoginUserRequest loginRequest) {
-        return ResponseEntity.ok(userService.login(loginRequest));
-    }
 
     @PatchMapping("/{id}")
     private ResponseEntity<LoginResponse> updateUser(@Valid @RequestBody UpdateUserRequest updateRequest, @PathVariable("id") Long id) {

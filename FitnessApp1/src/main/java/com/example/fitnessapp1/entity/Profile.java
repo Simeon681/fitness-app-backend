@@ -2,6 +2,7 @@ package com.example.fitnessapp1.entity;
 
 import com.example.fitnessapp1.shared.Gender;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -9,6 +10,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "profile")
 @Data
+@Builder
 public class Profile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
