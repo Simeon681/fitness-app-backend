@@ -38,6 +38,25 @@ public class MealServiceImpl implements MealService {
     }
 
     @Override
+    public MealResponse update(AddMealRequest addMealRequest, Long id) {
+        try {
+            Meal meal = mealRepository.findById(id)
+                    .orElseThrow(() -> new EntityNotFoundException("Unable to find meal with id: " + id + "!"));
+
+            meal.setName(addMealRequest.getName());
+            meal.setCalories(addMealRequest.getCalories());
+            meal.setProtein(addMealRequest.getProtein());
+            meal.setCarbs(addMealRequest.getCarbs());
+            meal.setFat(addMealRequest.getFat());
+            meal.setFiber(addMealRequest.getFiber());
+
+            return MEAL_MAPPER.toMealResponse(mealRepository.save(meal));
+        } catch (DataIntegrityViolationException e) {
+            throw new InvalidCredentialsException("Meal with name: " + addMealRequest.getName() + " already exists!");
+        }
+    }
+
+    @Override
     public MealResponse getById(Long id) {
         Meal meal = mealRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Unable to find meal with id: " + id + "!"));

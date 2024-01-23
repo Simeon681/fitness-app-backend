@@ -15,12 +15,12 @@ public class UserController {
     private final UserService userService;
 
     @PatchMapping("/{id}")
-    private ResponseEntity<LoginResponse> updateUser(@Valid @RequestBody UpdateUserRequest updateRequest, @PathVariable("id") Long id) {
+    private ResponseEntity<LoginResponse> update(@Valid @RequestBody UpdateUserRequest updateRequest, @PathVariable("id") Long id) {
         return ResponseEntity.ok(userService.update(updateRequest, id));
     }
 
     @DeleteMapping("/{id}")
-    private ResponseEntity<?> deleteUser(@PathVariable("id") Long id) {
+    private ResponseEntity<?> delete(@PathVariable("id") Long id) {
         userService.delete(id);
         return ResponseEntity.noContent().build();
     }

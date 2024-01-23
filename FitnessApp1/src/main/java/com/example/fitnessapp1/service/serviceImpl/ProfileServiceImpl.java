@@ -16,14 +16,6 @@ public class ProfileServiceImpl implements ProfileService {
     private final ProfileRepository profileRepository;
 
     @Override
-    public ProfileResource getById(Long id) {
-        Profile profile = profileRepository.findById(id).
-                orElseThrow(() -> new EntityNotFoundException("Unable to find profile with id: " + id + "!"));
-
-        return PROFILE_MAPPER.toProfileResource(profile);
-    }
-
-    @Override
     public ProfileResource update(ProfileResource profileResource, Long id) {
         try {
             Profile profile = profileRepository.getReferenceById(id);
@@ -41,5 +33,13 @@ public class ProfileServiceImpl implements ProfileService {
         } catch (Exception e) {
             throw new EntityNotFoundException("Profile not found with id: " + id + "!");
         }
+    }
+
+    @Override
+    public ProfileResource getById(Long id) {
+        Profile profile = profileRepository.findById(id).
+                orElseThrow(() -> new EntityNotFoundException("Unable to find profile with id: " + id + "!"));
+
+        return PROFILE_MAPPER.toProfileResource(profile);
     }
 }

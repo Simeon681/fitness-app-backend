@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import static com.example.fitnessapp1.mapper.ActivityStatMapper.ACTIVITY_STAT_MAPPER;
 
@@ -34,15 +35,19 @@ public class ActivityStatServiceImpl implements ActivityStatService {
     }
 
     @Override
+    public List<ActivityStat> searchAllByDate(LocalDate date) {
+        return activityStatRepository.searchAllByDate(date);
+    }
+
+    @Override
     public ActivityStatResource update(ActivityStatResource activityStatResource, Long userId, Long id) {
         try {
             ActivityStat activityStat = activityStatRepository.getReferenceById(id);
-            // TODO: uncomment
-//            if (!activityStat.getDate().equals(LocalDate.now().toString())) {
-//                add(activityStatResource, userId);
-//            }
 
-            // TODO: maybe delete
+            if (!activityStat.getDate().equals(LocalDate.now())) {
+                create(activityStatResource, userId);
+            }
+
             User user = userRepository.findById(id)
                     .orElseThrow(() -> new EntityNotFoundException("Unable to find user with id: " + id + "!"));
 
