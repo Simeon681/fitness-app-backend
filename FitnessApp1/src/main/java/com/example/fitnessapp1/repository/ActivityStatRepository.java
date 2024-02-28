@@ -10,4 +10,6 @@ import java.util.List;
 @Repository
 public interface ActivityStatRepository extends JpaRepository<ActivityStat, Long> {
     List<ActivityStat> searchAllByDate(LocalDate date);
+    ActivityStat findByUserIdAndDate(Long id, LocalDate date);
+    void deleteByUserId(Long id);
 }

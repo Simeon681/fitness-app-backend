@@ -6,9 +6,12 @@ import com.example.fitnessapp1.resource.response.MealStatResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 @Mapper
 public interface MealStatMapper {
     MealStatMapper MEAL_STAT_MAPPER = Mappers.getMapper(MealStatMapper.class);
     MealStat fromMealStatRequest(AddMealStatRequest addMealStatRequest);
     MealStatResponse toMealStatResponse(MealStat mealStat);
+    List<MealStatResponse> toMealStatResponses(List<MealStat> byUserIdAndDate);
 }

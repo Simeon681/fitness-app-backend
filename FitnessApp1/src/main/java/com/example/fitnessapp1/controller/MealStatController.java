@@ -3,12 +3,13 @@ package com.example.fitnessapp1.controller;
 import com.example.fitnessapp1.resource.request.AddMealStatRequest;
 import com.example.fitnessapp1.resource.response.MealStatResponse;
 import com.example.fitnessapp1.service.MealStatService;
+import com.example.fitnessapp1.shared.MealType;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-// TODO: Think about different name for this instead of "MealStat"
+import java.time.LocalDate;
 
 @RestController
 @RequestMapping("/api/v1/meal-stat")
@@ -16,13 +17,24 @@ import org.springframework.web.bind.annotation.*;
 public class MealStatController {
     private final MealStatService mealStatService;
 
-    @PostMapping("/create/{id}/{mealId}")
+    @PostMapping("/create")
     private ResponseEntity<MealStatResponse> createMealStat(
             @Valid @RequestBody AddMealStatRequest mealStatRequest,
-            @PathVariable("id") Long id,
-            @PathVariable("mealId") Long mealId
+            @RequestParam("mealId") Long mealId
     ) {
-        return ResponseEntity.ok(mealStatService.create(mealStatRequest, id, mealId));
+
+        System.out.println("mealStatRequest: " + mealStatRequest);
+        return ResponseEntity.ok(mealStatService.create(mealStatRequest, mealId));
+    }
+
+    @GetMapping("/search-by-date")
+    private ResponseEntity<?> searchByDate(@RequestParam("date") LocalDate date) {
+        return ResponseEntity.ok(mealStatService.searchMealStatByDate(date));
+    }
+
+    @GetMapping
+    private ResponseEntity<?> searchByUserIdAndDateAndTypeBreakfast(@RequestParam("type") MealType type) {
+        return ResponseEntity.ok(mealStatService.searchMealStatByUserIdAndDateAndType(type));
     }
 
     @DeleteMapping("/{id}")

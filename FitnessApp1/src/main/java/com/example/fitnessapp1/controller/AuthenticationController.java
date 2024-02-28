@@ -1,6 +1,9 @@
-package com.example.fitnessapp1.auth;
+package com.example.fitnessapp1.controller;
 
+import com.example.fitnessapp1.service.AuthenticationService;
+import com.example.fitnessapp1.resource.request.AuthenticationRequest;
 import com.example.fitnessapp1.resource.request.RegisterUserRequest;
+import com.example.fitnessapp1.resource.response.AuthenticationResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

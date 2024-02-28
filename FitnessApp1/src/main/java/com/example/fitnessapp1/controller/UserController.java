@@ -3,6 +3,7 @@ package com.example.fitnessapp1.controller;
 import com.example.fitnessapp1.resource.request.UpdateUserRequest;
 import com.example.fitnessapp1.resource.response.LoginResponse;
 import com.example.fitnessapp1.service.UserService;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,14 +15,16 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     private final UserService userService;
 
-    @PatchMapping("/{id}")
-    private ResponseEntity<LoginResponse> update(@Valid @RequestBody UpdateUserRequest updateRequest, @PathVariable("id") Long id) {
-        return ResponseEntity.ok(userService.update(updateRequest, id));
+    @PatchMapping()
+    private ResponseEntity<LoginResponse> update(@Valid @RequestBody UpdateUserRequest updateRequest) {
+        return ResponseEntity.ok(userService.update(updateRequest));
     }
 
-    @DeleteMapping("/{id}")
-    private ResponseEntity<?> delete(@PathVariable("id") Long id) {
-        userService.delete(id);
+
+    @Transactional
+    @DeleteMapping()
+    protected ResponseEntity<?> delete() {
+        userService.delete();
         return ResponseEntity.noContent().build();
     }
 }

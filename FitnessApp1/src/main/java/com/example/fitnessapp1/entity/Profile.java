@@ -1,16 +1,20 @@
 package com.example.fitnessapp1.entity;
 
+import com.example.fitnessapp1.shared.ActivityLevel;
 import com.example.fitnessapp1.shared.Gender;
+import com.example.fitnessapp1.shared.WeightGoal;
 import jakarta.persistence.*;
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "profile")
 @Data
-@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Profile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,21 +38,29 @@ public class Profile {
     @Column(name = "weight", nullable = false, columnDefinition = "NUMERIC(4, 1)")
     private Float weight;
 
-//    @Column(name = "BMI", columnDefinition = "NUMERIC(3, 1)")
-//    private Float BMI;
-//
-//    @Column(name = "body_fat", columnDefinition = "NUMERIC(3, 1)")
-//    private Float bodyFat;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "activity_level", nullable = false, columnDefinition = "VARCHAR(20)")
+    private ActivityLevel activityLevel;
 
-    @Column(name = "goal_calories", nullable = false, columnDefinition = "INTEGER")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "weight_goal", nullable = false, columnDefinition = "VARCHAR(20)")
+    private WeightGoal weightGoal;
+
+    @Column(name = "goal_calories", columnDefinition = "INTEGER")
     private Integer goalCalories;
 
-    @Column(name = "goal_weight", nullable = false, columnDefinition = "NUMERIC(4, 1)")
-    private Float goalWeight;
+    @Column(name = "goal_protein", columnDefinition = "FLOAT")
+    private Float goalProtein;
+
+    @Column(name = "goal_carbs", columnDefinition = "FLOAT")
+    private Float goalCarbs;
+
+    @Column(name = "goal_fat", columnDefinition = "FLOAT")
+    private Float goalFat;
 
     @Column(name = "goal_steps", nullable = false, columnDefinition = "INTEGER")
     private Integer goalSteps;
 
-    @Column(name = "goal_water", nullable = false, columnDefinition = "NUMERIC(3, 1)")
+    @Column(name = "goal_water", columnDefinition = "NUMERIC(3, 2)")
     private Float goalWater;
 }

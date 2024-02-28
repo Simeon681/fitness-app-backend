@@ -1,18 +1,18 @@
 package com.example.fitnessapp1.resource.request;
 
+import com.example.fitnessapp1.shared.ActivityLevel;
 import com.example.fitnessapp1.shared.Gender;
+import com.example.fitnessapp1.shared.WeightGoal;
 import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-import java.time.LocalDate;
-
 @Data
 public class ProfileResource {
     @NotNull
-    private LocalDate dateOfBirth;
+    private String dateOfBirth;
 
     @NotNull
     private Gender gender;
@@ -28,20 +28,12 @@ public class ProfileResource {
     private float weight;
 
     @NotNull
-    @Min(0)
-    private int goalCalories;
+    private ActivityLevel activityLevel;
 
     @NotNull
-    @DecimalMin(value = "30.0", inclusive = false)
-    @DecimalMax(value = "400.0", inclusive = false)
-    private float goalWeight;
+    private WeightGoal weightGoal;
 
     @NotNull
     @Min(0)
     private int goalSteps;
-
-    @NotNull
-    @DecimalMin(value = "0.0", inclusive = false)
-    @DecimalMax(value = "10.0", inclusive = false)
-    private float goalWater;
 }

@@ -20,12 +20,21 @@ public class ActivityStat {
     @Column(name = "date", nullable = false, columnDefinition = "DATE")
     private LocalDate date;
 
-    @Column(name = "steps", nullable = false, columnDefinition = "INTEGER")
+    @Column(name = "steps", columnDefinition = "INTEGER")
     private Integer steps;
 
-    @Column(name = "calories_consumed", nullable = false, columnDefinition = "INTEGER")
+    @Column(name = "calories_consumed", columnDefinition = "INTEGER")
     private Integer calories;
 
-    @Column(name = "water", nullable = false, columnDefinition = "NUMERIC(3, 1)")
+    @Column(name = "protein_comsumed", columnDefinition = "FLOAT")
+    private Float protein;
+
+    @Column(name = "carbs_comsumed", columnDefinition = "FLOAT")
+    private Float carbs;
+
+    @Column(name = "fat_comsumed", columnDefinition = "FLOAT")
+    private Float fat;
+
+    @Column(name = "water_comsumed", columnDefinition = "NUMERIC(3, 2)")
     private Float water;
 }

@@ -28,10 +28,4 @@ public class Meal {
 
     @Column(name = "fat", nullable = false, columnDefinition = "NUMERIC(5, 2)")
     private Float fat;
-
-    @Column(name = "fiber", nullable = false, columnDefinition = "NUMERIC(5, 2)")
-    private Float fiber;
-
-    @Column(name = "sugar", nullable = false, columnDefinition = "NUMERIC(5, 2)")
-    private Float sugar;
 }

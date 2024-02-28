@@ -28,14 +28,4 @@ public class AddMealRequest {
     @DecimalMin(value = "0.0")
     @DecimalMax(value = "100.0")
     private float fat;
-
-    @NotNull
-    @DecimalMin(value = "0.0")
-    @DecimalMax(value = "100.0")
-    private float fiber;
-
-    @NotNull
-    @DecimalMin(value = "0.0")
-    @DecimalMax(value = "100.0")
-    private float sugar;
 }

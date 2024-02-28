@@ -1,5 +1,6 @@
 package com.example.fitnessapp1.controller;
 
+import com.example.fitnessapp1.entity.Meal;
 import com.example.fitnessapp1.resource.request.AddMealRequest;
 import com.example.fitnessapp1.resource.response.MealResponse;
 import com.example.fitnessapp1.service.MealService;
@@ -30,7 +31,7 @@ public class MealController {
     }
 
     @GetMapping("/{id}")
-    private ResponseEntity<MealResponse> getById(@PathVariable("id") Long id) {
+    private ResponseEntity<Meal> getById(@PathVariable("id") Long id) {
         return ResponseEntity.ok(mealService.getById(id));
     }
 

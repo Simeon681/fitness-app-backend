@@ -1,6 +1,7 @@
 package com.example.fitnessapp1.controller;
 
 import com.example.fitnessapp1.resource.request.ProfileResource;
+import com.example.fitnessapp1.resource.response.ProfileResponse;
 import com.example.fitnessapp1.service.ProfileService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -13,13 +14,13 @@ import org.springframework.web.bind.annotation.*;
 public class ProfileController {
     private final ProfileService profileService;
 
-    @PatchMapping("/{id}")
-    private ResponseEntity<ProfileResource> update(@Valid @RequestBody ProfileResource profileResource, @PathVariable("id") Long id) {
-        return ResponseEntity.ok(profileService.update(profileResource, id));
+    @PatchMapping()
+    private ResponseEntity<ProfileResource> update(@Valid @RequestBody ProfileResource profileResource) {
+        return ResponseEntity.ok(profileService.update(profileResource));
     }
 
-    @GetMapping("/{id}")
-    private ResponseEntity<ProfileResource> getById(@PathVariable Long id) {
-        return ResponseEntity.ok(profileService.getById(id));
+    @GetMapping()
+    private ResponseEntity<ProfileResponse> getProfile() {
+        return ResponseEntity.ok(profileService.getProfile());
     }
 }

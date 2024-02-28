@@ -23,8 +23,8 @@ public class MealStat {
     @JoinColumn(name = "meal_id", nullable = false, referencedColumnName = "id")
     private Meal meal;
 
-    @Column(name = "portion", nullable = false, columnDefinition = "NUMERIC(3, 1)")
-    private Float portion; // 1 portion = 100g
+    @Column(name = "portion", nullable = false)
+    private Float portion;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "type", nullable = false, columnDefinition = "VARCHAR(9)")
