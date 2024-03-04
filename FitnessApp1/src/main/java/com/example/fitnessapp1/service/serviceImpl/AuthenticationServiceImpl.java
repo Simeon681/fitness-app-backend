@@ -11,6 +11,8 @@ import com.example.fitnessapp1.resource.request.RegisterUserRequest;
 import com.example.fitnessapp1.resource.response.AuthenticationResponse;
 import com.example.fitnessapp1.service.ActivityStatService;
 import com.example.fitnessapp1.service.AuthenticationService;
+import com.example.fitnessapp1.shared.exception.InvalidCredentialsException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -30,7 +32,13 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final JWTService jwtService;
     private final AuthenticationManager authenticationManager;
 
+    @Transactional
     public AuthenticationResponse register(RegisterUserRequest registerRequest) {
+        if (userRepository.existsByUsername(registerRequest.getUsername())) {
+            throw new InvalidCredentialsException("User with username: "
+                    + registerRequest.getUsername() + " already exists!");
+        }
+
         User user = new User();
         user.setUsername(registerRequest.getUsername());
         user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
@@ -53,15 +61,14 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         profile.setGoalWater(registerRequest.getGoalWater());
         profile.setGoalSteps(registerRequest.getGoalSteps());
 
-        profileRepository.save(profile);
         userRepository.save(user);
-        ActivityStatResource activityStatResource = new ActivityStatResource();
-        activityStatService.create(activityStatResource, user.getId());
-        var jwtToken = jwtService.generateToken(user);
+        profileRepository.save(profile);
+        activityStatService.create(new ActivityStatResource(), user.getId());
 
-        return AuthenticationResponse.builder()
-                .token(jwtToken)
-                .build();
+        AuthenticationResponse response = new AuthenticationResponse();
+        response.setToken(jwtService.generateToken(user));
+
+        return response;
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest authRequest) {
@@ -71,11 +78,12 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                         authRequest.getPassword()
                 )
         );
-        var user = userRepository.findByUsername(authRequest.getUsername()).orElseThrow();
-        var jwtToken = jwtService.generateToken(user);
 
-        return AuthenticationResponse.builder()
-                .token(jwtToken)
-                .build();
+        User user = userRepository.findByUsername(authRequest.getUsername()).orElseThrow();
+
+        AuthenticationResponse response = new AuthenticationResponse();
+        response.setToken(jwtService.generateToken(user));
+
+        return response;
     }
 }

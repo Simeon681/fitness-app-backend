@@ -25,14 +25,17 @@ public class MealController {
         return ResponseEntity.ok(mealService.searchMealByName(mealName));
     }
 
-    @PatchMapping("/{id}")
-    private ResponseEntity<MealResponse> updateMeal(@Valid @RequestBody AddMealRequest addMealRequest, @PathVariable("id") Long id) {
-        return ResponseEntity.ok(mealService.update(addMealRequest, id));
-    }
-
     @GetMapping("/{id}")
     private ResponseEntity<Meal> getById(@PathVariable("id") Long id) {
         return ResponseEntity.ok(mealService.getById(id));
+    }
+
+    @PatchMapping("/{id}")
+    private ResponseEntity<MealResponse> updateMeal(
+            @Valid @RequestBody AddMealRequest addMealRequest,
+            @PathVariable("id") Long id
+    ) {
+        return ResponseEntity.ok(mealService.update(addMealRequest, id));
     }
 
     @GetMapping("/name/{name}")

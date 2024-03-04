@@ -15,7 +15,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.List;
 
 import static com.example.fitnessapp1.mapper.ActivityStatMapper.ACTIVITY_STAT_MAPPER;
 
@@ -51,31 +50,19 @@ public class ActivityStatServiceImpl implements ActivityStatService {
             activityStat.setWater(0f);
 
             return ACTIVITY_STAT_MAPPER.toActivityStatResource(activityStatRepository.save(activityStat));
-        } catch (Exception e) { // TODO: specify exception
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
+    // every day at midnight
     @Override
     @Transactional
-    @Scheduled(cron = "00 00 00 * * *") // every day at midnight
+    @Scheduled(cron = "00 00 00 * * *")
     public void executeDailyTask() {
-        ActivityStatResource activityStatResource = new ActivityStatResource();
-        activityStatResource.setSteps(0);
-        activityStatResource.setCalories(0);
-        activityStatResource.setProtein(0f);
-        activityStatResource.setCarbs(0f);
-        activityStatResource.setFat(0f);
-        activityStatResource.setWater(0f);
-
         for (User user : userRepository.getAll()) {
-            create(activityStatResource, user.getId());
+            create(new ActivityStatResource(), user.getId());
         }
-    }
-
-    @Override
-    public List<ActivityStat> searchAllByDate(LocalDate date) {
-        return activityStatRepository.searchAllByDate(date);
     }
 
     @Override
@@ -103,7 +90,8 @@ public class ActivityStatServiceImpl implements ActivityStatService {
             ActivityStat activityStat = activityStatRepository.findByUserIdAndDate(userId, LocalDate.now());
 
             User user = userRepository.findById(userId)
-                    .orElseThrow(() -> new EntityNotFoundException("Unable to find user with id: " + userId + "!"));
+                    .orElseThrow(() ->
+                            new EntityNotFoundException("Unable to find user with id: " + userId + "!"));
 
             activityStat.setUser(user);
 

@@ -12,8 +12,10 @@ import com.example.fitnessapp1.resource.response.MealStatResponse;
 import com.example.fitnessapp1.service.ActivityStatService;
 import com.example.fitnessapp1.service.MealStatService;
 import com.example.fitnessapp1.shared.MealType;
+import com.example.fitnessapp1.shared.exception.InvalidCredentialsException;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -44,28 +46,23 @@ public class MealStatServiceImpl implements MealStatService {
             MealStat mealStat = MEAL_STAT_MAPPER.fromMealStatRequest(addMealStatRequest);
             mealStat.setUser(userRepository.getReferenceById(id));
             mealStat.setMeal(mealRepository.getReferenceById(mealId));
-            mealStat.setPortion(addMealStatRequest.getPortion());
             mealStat.setDate(LocalDate.now());
 
             ActivityStat activityStat = activityStatRepository.findByUserIdAndDate(id, LocalDate.now());
             ActivityStatResource activityStatResource;
 
             activityStatResource = ACTIVITY_STAT_MAPPER.toActivityStatResource(activityStat);
-            activityStatResource
-                    .setCalories(activityStatResource.getCalories(mealStat));
-            activityStatResource
-                    .setProtein(activityStatResource.getProtein(mealStat));
-            activityStatResource
-                    .setCarbs(activityStatResource.getCarbs(mealStat));
-            activityStatResource
-                    .setFat(activityStatResource.getFat(mealStat));
+            activityStatResource.setCalories(activityStatResource.getCalories(mealStat));
+            activityStatResource.setProtein(activityStatResource.getProtein(mealStat));
+            activityStatResource.setCarbs(activityStatResource.getCarbs(mealStat));
+            activityStatResource.setFat(activityStatResource.getFat(mealStat));
             activityStatService.update(activityStatResource);
 
             mealStatRepository.save(mealStat);
 
             return MEAL_STAT_MAPPER.toMealStatResponse(mealStat);
-        } catch (EntityNotFoundException e) { // TODO: specify exception
-            throw new EntityNotFoundException("Unable to find meal with id: " + mealId + "!");
+        } catch (DataIntegrityViolationException e) {
+            throw new InvalidCredentialsException("Unable to find meal with id: " + mealId + "!");
         }
     }
 

@@ -22,8 +22,6 @@ public class MealStatController {
             @Valid @RequestBody AddMealStatRequest mealStatRequest,
             @RequestParam("mealId") Long mealId
     ) {
-
-        System.out.println("mealStatRequest: " + mealStatRequest);
         return ResponseEntity.ok(mealStatService.create(mealStatRequest, mealId));
     }
 
