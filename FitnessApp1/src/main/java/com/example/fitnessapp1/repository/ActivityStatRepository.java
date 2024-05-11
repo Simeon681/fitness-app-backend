@@ -8,8 +8,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Repository
-public interface ActivityStatRepository extends JpaRepository<ActivityStat, Long> {
+public interface ActivityStatRepository extends JpaRepository<ActivityStat, String> {
     List<ActivityStat> searchAllByDate(LocalDate date);
-    ActivityStat findByUserIdAndDate(Long id, LocalDate date);
-    void deleteByUserId(Long id);
+    ActivityStat findByUserIdAndDate(String id, LocalDate date);
+    void deleteByUserId(String id);
 }

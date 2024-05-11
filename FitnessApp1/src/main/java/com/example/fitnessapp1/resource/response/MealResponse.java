@@ -8,8 +8,6 @@ import org.hibernate.validator.constraints.Length;
 
 @Data
 public class MealResponse {
-    private Long id;
-
     @NotEmpty
     @Length(min = 2, max = 32)
     private String name;

@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/meal")
 @RequiredArgsConstructor
@@ -21,19 +23,19 @@ public class MealController {
     }
 
     @GetMapping("/search")
-    private ResponseEntity<?> searchMealByName(@RequestParam("mealName") String mealName) {
+    private ResponseEntity<List<Meal>> searchMealByName(@RequestParam("mealName") String mealName) {
         return ResponseEntity.ok(mealService.searchMealByName(mealName));
     }
 
     @GetMapping("/{id}")
-    private ResponseEntity<Meal> getById(@PathVariable("id") Long id) {
+    private ResponseEntity<Meal> getById(@PathVariable("id") String id) {
         return ResponseEntity.ok(mealService.getById(id));
     }
 
     @PatchMapping("/{id}")
     private ResponseEntity<MealResponse> updateMeal(
             @Valid @RequestBody AddMealRequest addMealRequest,
-            @PathVariable("id") Long id
+            @PathVariable("id") String id
     ) {
         return ResponseEntity.ok(mealService.update(addMealRequest, id));
     }
@@ -44,7 +46,7 @@ public class MealController {
     }
 
     @DeleteMapping("/{id}")
-    private ResponseEntity<?> delete(@PathVariable("id") Long id) {
+    private ResponseEntity<?> delete(@PathVariable("id") String id) {
         mealService.delete(id);
         return ResponseEntity.noContent().build();
     }

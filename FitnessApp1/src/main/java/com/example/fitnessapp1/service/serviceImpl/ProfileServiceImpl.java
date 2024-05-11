@@ -24,7 +24,7 @@ public class ProfileServiceImpl implements ProfileService {
     @Override
     public ProfileResource update(ProfileResource profileResource) {
         try {
-            Long id = userRepository.findByUsername(
+            String id = userRepository.findByEmail(
                     SecurityContextHolder
                             .getContext()
                             .getAuthentication()
@@ -49,7 +49,7 @@ public class ProfileServiceImpl implements ProfileService {
 
     @Override
     public ProfileResponse getProfile() {
-        Long id = userRepository.findByUsername(
+        String id = userRepository.findByEmail(
                 SecurityContextHolder
                         .getContext()
                         .getAuthentication()

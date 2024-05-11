@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.*;
 public class ProfileController {
     private final ProfileService profileService;
 
-    @PatchMapping()
+    @PatchMapping
     private ResponseEntity<ProfileResource> update(@Valid @RequestBody ProfileResource profileResource) {
         return ResponseEntity.ok(profileService.update(profileResource));
     }
 
-    @GetMapping()
+    @GetMapping
     private ResponseEntity<ProfileResponse> getProfile() {
         return ResponseEntity.ok(profileService.getProfile());
     }

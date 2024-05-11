@@ -9,8 +9,8 @@ import java.util.List;
 public interface MealService {
     MealResponse create(AddMealRequest addMealRequest);
     List<Meal> searchMealByName(String mealName);
-    Meal getById(Long id);
-    MealResponse update(AddMealRequest addMealRequest, Long id);
+    Meal getById(String id);
+    MealResponse update(AddMealRequest addMealRequest, String id);
     MealResponse getByName(String name);
-    void delete(Long id);
+    void delete(String id);
 }

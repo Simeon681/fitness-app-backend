@@ -20,7 +20,7 @@ public class MealStatController {
     @PostMapping("/create")
     private ResponseEntity<MealStatResponse> createMealStat(
             @Valid @RequestBody AddMealStatRequest mealStatRequest,
-            @RequestParam("mealId") Long mealId
+            @RequestParam("mealId") String mealId
     ) {
         return ResponseEntity.ok(mealStatService.create(mealStatRequest, mealId));
     }
@@ -36,7 +36,7 @@ public class MealStatController {
     }
 
     @DeleteMapping("/{id}")
-    private ResponseEntity<?> delete(@PathVariable("id") Long id) {
+    private ResponseEntity<?> delete(@PathVariable("id") String id) {
         mealStatService.delete(id);
         return ResponseEntity.noContent().build();
     }

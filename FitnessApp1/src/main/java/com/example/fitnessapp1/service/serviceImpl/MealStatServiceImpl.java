@@ -34,9 +34,9 @@ public class MealStatServiceImpl implements MealStatService {
     private final ActivityStatService activityStatService;
     private final ActivityStatRepository activityStatRepository;
 
-    public MealStatResponse create(AddMealStatRequest addMealStatRequest, Long mealId) {
+    public MealStatResponse create(AddMealStatRequest addMealStatRequest, String mealId) {
         try {
-            Long id = userRepository.findByUsername(
+            String id = userRepository.findByEmail(
                     SecurityContextHolder
                             .getContext()
                             .getAuthentication()
@@ -68,7 +68,7 @@ public class MealStatServiceImpl implements MealStatService {
 
     @Override
     public List<MealStatResponse> searchMealStatByUserIdAndDateAndType(MealType type) {
-        Long id = userRepository.findByUsername(
+        String id = userRepository.findByEmail(
                 SecurityContextHolder
                         .getContext()
                         .getAuthentication()
@@ -81,7 +81,7 @@ public class MealStatServiceImpl implements MealStatService {
 
     @Override
     public List<MealStatResponse> searchMealStatByDate(LocalDate date) {
-        Long id = userRepository.findByUsername(
+        String id = userRepository.findByEmail(
                 SecurityContextHolder
                         .getContext()
                         .getAuthentication()
@@ -94,7 +94,7 @@ public class MealStatServiceImpl implements MealStatService {
 
 
     @Override
-    public void delete(Long id) {
+    public void delete(String id) {
         if (mealStatRepository.existsById(id)) {
             MealStat mealStat = mealStatRepository.getReferenceById(id);
 

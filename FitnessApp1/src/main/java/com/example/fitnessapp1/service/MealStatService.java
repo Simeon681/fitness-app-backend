@@ -8,8 +8,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface MealStatService {
-    MealStatResponse create(AddMealStatRequest addMealStatRequest, Long mealId);
+    MealStatResponse create(AddMealStatRequest addMealStatRequest, String mealId);
     List<MealStatResponse> searchMealStatByDate(LocalDate date);
     List<MealStatResponse> searchMealStatByUserIdAndDateAndType(MealType type);
-    void delete(Long id);
+    void delete(String id);
 }

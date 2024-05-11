@@ -25,11 +25,11 @@ public class ActivityStatServiceImpl implements ActivityStatService {
     private final UserRepository userRepository;
 
     @Override
-    public ActivityStatResource create(ActivityStatResource activityStatResource, @Nullable Long userId) {
+    public ActivityStatResource create(ActivityStatResource activityStatResource, @Nullable String userId) {
         try {
-            Long id;
+            String id;
             if (userId == null) {
-                id = userRepository.findByUsername(
+                id = userRepository.findByEmail(
                         SecurityContextHolder
                                 .getContext()
                                 .getAuthentication()
@@ -67,7 +67,7 @@ public class ActivityStatServiceImpl implements ActivityStatService {
 
     @Override
     public ActivityStat findByUserIdAndDate() {
-        Long id = userRepository.findByUsername(
+        String id = userRepository.findByEmail(
                 SecurityContextHolder
                         .getContext()
                         .getAuthentication()
@@ -80,7 +80,7 @@ public class ActivityStatServiceImpl implements ActivityStatService {
     @Override
     public ActivityStatResource update(ActivityStatResource activityStatResource) {
         try {
-            Long userId = userRepository.findByUsername(
+            String userId = userRepository.findByEmail(
                     SecurityContextHolder
                             .getContext()
                             .getAuthentication()

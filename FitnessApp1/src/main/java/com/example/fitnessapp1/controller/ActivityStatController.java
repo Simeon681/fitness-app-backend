@@ -21,7 +21,7 @@ public class ActivityStatController {
         return ResponseEntity.ok(activityStatService.create(activityStatResource, null));
     }
 
-    @PatchMapping()
+    @PatchMapping
     private ResponseEntity<ActivityStatResource> updateActivityStat(
             @Valid @RequestBody ActivityStatResource activityStatResource
     ) {

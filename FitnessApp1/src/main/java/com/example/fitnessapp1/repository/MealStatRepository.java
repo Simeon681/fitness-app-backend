@@ -9,8 +9,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Repository
-public interface MealStatRepository extends JpaRepository<MealStat, Long> {
-    List<MealStat> findByUserIdAndDate(Long userId, LocalDate date);
-    List<MealStat> findByUserIdAndDateAndType(Long userId, LocalDate date, MealType type);
-    void deleteByUserId(Long id);
+public interface MealStatRepository extends JpaRepository<MealStat, String> {
+    List<MealStat> findByUserIdAndDate(String userId, LocalDate date);
+    List<MealStat> findByUserIdAndDateAndType(String userId, LocalDate date, MealType type);
+    void deleteByUserId(String id);
 }
