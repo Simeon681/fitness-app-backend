@@ -1,15 +1,14 @@
 package com.example.fitnessapp1.entity;
 
-import com.example.fitnessapp1.shared.MealType;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "meal_stat")
+@Table(name = "weight_changes")
 @Data
-public class MealStat {
+public class WeightChange {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id")
@@ -19,17 +18,9 @@ public class MealStat {
     @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "id")
     private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "meal_id", nullable = false, referencedColumnName = "id")
-    private Meal meal;
-
-    @Column(name = "portion", nullable = false)
-    private Float portion;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "type", nullable = false)
-    private MealType type;
-
     @Column(name = "date", nullable = false, columnDefinition = "DATE")
     private LocalDate date;
+
+    @Column(name = "weight", nullable = false, columnDefinition = "NUMERIC(4, 1)")
+    private Float weight;
 }

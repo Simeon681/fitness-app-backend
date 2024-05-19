@@ -29,7 +29,7 @@ public class Profile {
     private LocalDate dateOfBirth;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "gender", nullable = false, columnDefinition = "VARCHAR(6)")
+    @Column(name = "gender", nullable = false)
     private Gender gender;
 
     @Column(name = "height", nullable = false, columnDefinition = "NUMERIC(4, 1)")
@@ -39,11 +39,11 @@ public class Profile {
     private Float weight;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "activity_level", nullable = false, columnDefinition = "VARCHAR(20)")
+    @Column(name = "activity_level", nullable = false)
     private ActivityLevel activityLevel;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "weight_goal", nullable = false, columnDefinition = "VARCHAR(20)")
+    @Column(name = "weight_goal", nullable = false)
     private WeightGoal weightGoal;
 
     @Column(name = "goal_calories", columnDefinition = "INTEGER")

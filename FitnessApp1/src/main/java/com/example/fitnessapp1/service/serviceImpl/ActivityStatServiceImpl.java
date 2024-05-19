@@ -56,13 +56,10 @@ public class ActivityStatServiceImpl implements ActivityStatService {
     }
 
     // every day at midnight
-    @Override
     @Transactional
     @Scheduled(cron = "00 00 00 * * *")
     public void executeDailyTask() {
-        for (User user : userRepository.getAll()) {
-            create(new ActivityStatResource(), user.getId());
-        }
+        userRepository.getAll().forEach(user -> create(new ActivityStatResource(), user.getId()));
     }
 
     @Override

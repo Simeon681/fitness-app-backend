@@ -31,6 +31,12 @@ public class AuthenticationController {
         return ResponseEntity.ok(authService.authenticate(authRequest));
     }
 
+    @PostMapping("/auto-login")
+    public ResponseEntity<?> autoLogin(HttpServletRequest request) {
+        authService.autoLogin(request);
+        return ResponseEntity.noContent().build();
+    }
+
     @PostMapping("/refresh-token")
     private void refreshToken(
             HttpServletRequest request,

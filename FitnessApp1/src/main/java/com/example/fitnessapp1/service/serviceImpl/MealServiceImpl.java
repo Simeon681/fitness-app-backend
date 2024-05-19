@@ -39,10 +39,8 @@ public class MealServiceImpl implements MealService {
 
     @Override
     public Meal getById(String id) {
-        Meal meal = mealRepository.findById(id)
+        return mealRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Unable to find meal with id: " + id + "!"));
-
-        return meal;
     }
 
     @Override

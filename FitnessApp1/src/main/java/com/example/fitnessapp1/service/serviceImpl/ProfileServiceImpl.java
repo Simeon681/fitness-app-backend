@@ -55,8 +55,8 @@ public class ProfileServiceImpl implements ProfileService {
                         .getAuthentication()
                         .getName()
         ).orElseThrow().getId();
-        Profile profile = profileRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Unable to find profile with id: " + id + "!"));
+
+        Profile profile = profileRepository.findByUserId(id);
 
         return PROFILE_MAPPER.toProfileResponse(profile);
     }

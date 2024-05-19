@@ -12,20 +12,20 @@ public class AddMealRequest {
 
     @NotNull
     @Min(0)
-    private int calories;
+    private Integer calories;
 
     @NotNull
     @DecimalMin(value = "0.0")
     @DecimalMax(value = "100.0")
-    private float protein;
+    private Float protein;
 
     @NotNull
     @DecimalMin(value = "0.0")
     @DecimalMax(value = "100.0")
-    private float carbs;
+    private Float carbs;
 
     @NotNull
     @DecimalMin(value = "0.0")
     @DecimalMax(value = "100.0")
-    private float fat;
+    private Float fat;
 }

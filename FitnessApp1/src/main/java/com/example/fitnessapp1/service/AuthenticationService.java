@@ -13,6 +13,7 @@ public interface AuthenticationService {
     @Transactional
     AuthenticationResponse register(RegisterUserRequest registerRequest);
     AuthenticationResponse authenticate(AuthenticationRequest authRequest);
+    void autoLogin(HttpServletRequest request);
     void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException;
     void logout();
 }

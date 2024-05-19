@@ -22,9 +22,8 @@ public class User implements UserDetails {
     @Column(name = "id")
     private String id;
 
-    @lombok.Getter
     @Column(name = "email", unique = true, nullable = false)
-    private String email; //TODO: add email validation
+    private String email;
 
     @Column(name = "username", nullable = false)
     private String username;
