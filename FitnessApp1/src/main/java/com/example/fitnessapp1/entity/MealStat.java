@@ -11,9 +11,9 @@ import java.time.LocalDate;
 @Data
 public class MealStat {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id")
-    private Long id;
+    private String id;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "id")
@@ -27,7 +27,7 @@ public class MealStat {
     private Float portion;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "type", nullable = false, columnDefinition = "VARCHAR(9)")
+    @Column(name = "type", nullable = false)
     private MealType type;
 
     @Column(name = "date", nullable = false, columnDefinition = "DATE")

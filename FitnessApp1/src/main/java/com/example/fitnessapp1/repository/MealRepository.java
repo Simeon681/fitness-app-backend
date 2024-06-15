@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface MealRepository extends JpaRepository<Meal, Long> {
+public interface MealRepository extends JpaRepository<Meal, String> {
     Optional<Meal> findByName(String name);
     List<Meal> findByNameContaining(String mealName);
 }

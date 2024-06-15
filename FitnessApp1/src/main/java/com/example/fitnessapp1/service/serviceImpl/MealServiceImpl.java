@@ -38,15 +38,13 @@ public class MealServiceImpl implements MealService {
     }
 
     @Override
-    public Meal getById(Long id) {
-        Meal meal = mealRepository.findById(id)
+    public Meal getById(String id) {
+        return mealRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Unable to find meal with id: " + id + "!"));
-
-        return meal;
     }
 
     @Override
-    public MealResponse update(AddMealRequest addMealRequest, Long id) {
+    public MealResponse update(AddMealRequest addMealRequest, String id) {
         try {
             Meal meal = mealRepository.findById(id)
                     .orElseThrow(() -> new EntityNotFoundException("Unable to find meal with id: " + id + "!"));
@@ -72,7 +70,7 @@ public class MealServiceImpl implements MealService {
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(String id) {
         if (mealRepository.existsById(id)) {
             mealRepository.deleteById(id);
         } else {

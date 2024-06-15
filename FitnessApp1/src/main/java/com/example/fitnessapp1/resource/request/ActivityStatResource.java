@@ -2,6 +2,7 @@ package com.example.fitnessapp1.resource.request;
 
 import com.example.fitnessapp1.entity.Meal;
 import com.example.fitnessapp1.entity.MealStat;
+import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Min;
 import lombok.Data;
 
@@ -10,14 +11,19 @@ public class ActivityStatResource {
     @Min(0)
     private Integer steps;
 
+    @Min(0)
     private Integer calories;
 
+    @DecimalMin("0.0")
     private Float protein;
 
+    @DecimalMin("0.0")
     private Float carbs;
 
+    @DecimalMin("0.0")
     private Float fat;
 
+    @DecimalMin("0.0")
     private Float water;
 
     public Integer getCalories(MealStat mealStat) {

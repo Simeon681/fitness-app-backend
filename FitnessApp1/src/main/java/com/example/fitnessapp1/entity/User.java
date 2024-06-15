@@ -18,29 +18,29 @@ import java.util.Collection;
 @AllArgsConstructor
 public class User implements UserDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id")
-    private Long id;
+    private String id;
 
-    @Column(name = "username", unique = true, nullable = false, columnDefinition = "VARCHAR(16)")
+    @Column(name = "email", unique = true, nullable = false)
+    private String email;
+
+    @Column(name = "username", nullable = false)
     private String username;
 
-    @Column(name = "password", nullable = false, columnDefinition = "VARCHAR(64)")
+    @Column(name = "password", nullable = false)
     private String password;
+
+    @Column(name = "refresh_token")
+    private String refreshToken;
+
+    @Builder.Default
+    @Column(name = "enabled")
+    private Boolean enabled = false;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
-    public String getUsername() {
-        return username;
     }
 
     @Override
@@ -60,6 +60,11 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return enabled;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
     }
 }

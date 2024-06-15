@@ -8,7 +8,6 @@ import lombok.Data;
 @Data
 public class AddMealStatRequest {
     @NotNull
-    @DecimalMin(value = "0.1")
     private Float portion;
 
     @NotNull

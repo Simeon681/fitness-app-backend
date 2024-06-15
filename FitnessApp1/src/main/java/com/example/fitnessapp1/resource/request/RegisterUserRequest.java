@@ -14,6 +14,10 @@ import java.time.format.DateTimeFormatter;
 @Data
 public class RegisterUserRequest {
     @NotEmpty
+    @Email
+    private String email;
+
+    @NotEmpty
     @Length(min = 6, max = 32)
     private String username;
 
